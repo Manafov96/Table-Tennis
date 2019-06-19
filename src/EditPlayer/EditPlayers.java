@@ -41,7 +41,7 @@ public class EditPlayers extends javax.swing.JFrame {
      */
     public EditPlayers() {
         initComponents();
-        Show_Products_In_JTable();
+        Show_Players_In_JTable();
     }
     String ImgPath = null;
     int pos = 0;
@@ -71,7 +71,7 @@ public class EditPlayers extends javax.swing.JFrame {
         return false;
     }
 
-    private ArrayList<EditPlayer> getProductList() {
+    private ArrayList<EditPlayer> getPlayersList() {
         ArrayList<EditPlayer> productList = new ArrayList<>();
         Connection con = getConnection();
         String query = "select  "
@@ -106,8 +106,8 @@ public class EditPlayers extends javax.swing.JFrame {
 
     }
 
-    private void Show_Products_In_JTable() {
-        ArrayList<EditPlayer> list = getProductList();
+    private void Show_Players_In_JTable() {
+        ArrayList<EditPlayer> list = getPlayersList();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Object[] row = new Object[5];
@@ -132,12 +132,12 @@ public class EditPlayers extends javax.swing.JFrame {
     // Show Data In Inputs
     private void ShowItem(int index) {
         setTeams();
-        jtxtID.setText(Integer.toString(getProductList().get(index).getId()));
-        jtxtFirstName.setText(getProductList().get(index).getFirstName());
-        jtxtLastName.setText(getProductList().get(index).getLastName());
-        jcbTeam.getModel().setSelectedItem(getProductList().get(index).getTeam());
-        jChoosedPicture.setIcon(ResizeImage(null, getProductList().get(index).getPicture()));
-        jtxtMobilePhone.setText(getProductList().get(index).getMobilePhone());
+        jtxtID.setText(Integer.toString(getPlayersList().get(index).getId()));
+        jtxtFirstName.setText(getPlayersList().get(index).getFirstName());
+        jtxtLastName.setText(getPlayersList().get(index).getLastName());
+        jcbTeam.getModel().setSelectedItem(getPlayersList().get(index).getTeam());
+        jChoosedPicture.setIcon(ResizeImage(null, getPlayersList().get(index).getPicture()));
+        jtxtMobilePhone.setText(getPlayersList().get(index).getMobilePhone());
     }
 
     /**
@@ -380,7 +380,7 @@ public class EditPlayers extends javax.swing.JFrame {
                     int ID = Integer.parseInt(jtxtID.getText());
                     ps.setInt(3, ID);
                     ps.executeUpdate();
-                    Show_Products_In_JTable();
+                    Show_Players_In_JTable();
                     JOptionPane.showMessageDialog(null, "Player Updated");
 
                 } catch (SQLException ex) {
@@ -404,7 +404,7 @@ public class EditPlayers extends javax.swing.JFrame {
                     int ID = Integer.parseInt(jtxtID.getText());
                     ps.setInt(4, ID);
                     ps.executeUpdate();
-                    Show_Products_In_JTable();
+                    Show_Players_In_JTable();
                     JOptionPane.showMessageDialog(null, "Player Updated");
 
                 } catch (HeadlessException | FileNotFoundException | NumberFormatException | SQLException ex) {
@@ -443,8 +443,8 @@ public class EditPlayers extends javax.swing.JFrame {
     private void jbtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNextActionPerformed
         pos++;
 
-        if (pos >= getProductList().size()) {
-            pos = getProductList().size() - 1;
+        if (pos >= getPlayersList().size()) {
+            pos = getPlayersList().size() - 1;
         }
 
         ShowItem(pos);
@@ -461,7 +461,7 @@ public class EditPlayers extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnPreviousActionPerformed
 
     private void jbtnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLastActionPerformed
-        pos = getProductList().size() - 1;
+        pos = getPlayersList().size() - 1;
         ShowItem(pos);
     }//GEN-LAST:event_jbtnLastActionPerformed
 
@@ -485,7 +485,7 @@ public class EditPlayers extends javax.swing.JFrame {
             ps.setInt(1, Integer.parseInt(jtxtID.getText()));
 
             ps.executeUpdate();
-            Show_Products_In_JTable();
+            Show_Players_In_JTable();
             JOptionPane.showMessageDialog(null, "Player Deleted");
 
         } catch (SQLException ex) {
